@@ -12,7 +12,9 @@
     "new-vault": "tsx mcp/cli.ts new-vault",
     "unregister-vault": "tsx mcp/cli.ts unregister-vault",
     "reader": "tsx site/reader.ts vault",
-    "reader:serve": "tsx site/reader.ts vault && cd vault/_reader && python3 -m http.server 8000"
+    "reader:serve": "tsx site/reader.ts vault && cd vault/_reader && python3 -m http.server 8000",
+    "portal": "tsx site/portal.ts",
+    "portal:serve": "tsx site/portal.ts && cd _portal && python3 -m http.server 8000"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
