@@ -1,0 +1,3 @@
+# Talk: Wiki gnome
+
+*(empty)*

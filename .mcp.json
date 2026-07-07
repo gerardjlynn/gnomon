@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "gnomon": {
+      "command": "npx",
+      "args": ["tsx", "mcp/server.ts", "--vault", "gnomon=vault"]
+    }
+  }
+}

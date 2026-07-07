@@ -1,0 +1,471 @@
+/* Gnomon — minimal stylesheet.
+ *
+ * Design intent: the article is the current statement; the talk page
+ * sits below as the working-out. Typography first, no decoration that
+ * doesn't earn its keep. Reads on a phone, prints reasonably.
+ */
+
+:root {
+  --fg: #1a1a1a;
+  --fg-muted: #666;
+  --fg-subtle: #999;
+  --bg: #fafaf7;
+  --bg-talk: #f0eee8;
+  --bg-code: #f4f2ec;
+  --accent: #5a4a2f;
+  --accent-soft: #8a7a5a;
+  --warn: #b04a2a;
+  --rule: #d8d4c8;
+
+  --serif: Charter, Georgia, "Iowan Old Style", "Apple Garamond", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 17px; }
+
+body {
+  font-family: var(--serif);
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.55;
+  margin: 0;
+  padding: 2rem 1.25rem 4rem;
+}
+
+main, aside, header, footer {
+  max-width: 38rem;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--sans);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+h1 { font-size: 1.85rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.25rem; margin: 2rem 0 0.6rem; }
+h3 { font-size: 1.05rem; margin: 1.5rem 0 0.4rem; }
+
+p { margin: 0 0 1rem; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover { color: var(--fg); }
+
+a.internal-link {
+  color: var(--accent);
+  text-decoration-style: dotted;
+}
+
+.broken-link {
+  color: var(--warn);
+  text-decoration: line-through;
+  cursor: help;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--bg-code);
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+}
+
+pre {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  background: var(--bg-code);
+  padding: 0.9rem 1rem;
+  border-radius: 3px;
+  overflow-x: auto;
+  line-height: 1.45;
+}
+pre code { background: transparent; padding: 0; }
+
+ul, ol { padding-left: 1.4rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.3rem; }
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.1rem 0 0.1rem 1rem;
+  border-left: 3px solid var(--rule);
+  color: var(--fg);
+}
+blockquote p:last-child { margin-bottom: 0; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 0.95em;
+}
+th, td {
+  text-align: left;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+th { font-family: var(--sans); font-weight: 600; }
+
+/* ---------- Article header & frontmatter ---------- */
+
+.breadcrumb {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  margin: 0 0 1.5rem;
+}
+.breadcrumb a {
+  color: var(--fg-muted);
+  text-decoration: none;
+}
+.breadcrumb a:hover { color: var(--fg); }
+
+.article-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.frontmatter {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.15rem 1rem;
+  margin: 1rem 0 0;
+}
+.frontmatter dt {
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  color: var(--fg-subtle);
+}
+.frontmatter dd { margin: 0; }
+.frontmatter code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.95em;
+  color: var(--fg);
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.05rem 0.45rem;
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+  background: var(--bg-code);
+  color: var(--fg-muted);
+}
+
+.badge-type-concept { background: #e8e3d5; color: #5a4a2f; }
+.badge-type-context { background: #e0e8d8; color: #4a5a32; }
+.badge-type-practice { background: #d8e0e8; color: #2f4a5a; }
+.badge-type-source { background: #e8dcd8; color: #5a3a2f; }
+
+.badge-status-current { background: transparent; color: var(--fg-subtle); }
+.badge-status-draft { background: #ede6cc; color: #6a5a1a; }
+.badge-status-stub { background: #e8e0e8; color: #5a3a5a; }
+.badge-status-deprecated { background: #e8d8d8; color: #6a2a2a; text-decoration: line-through; }
+
+.badge-kind-talk { background: #e0e8d8; color: #4a5a32; }
+.badge-kind-commit { background: #d8e0e8; color: #2f4a5a; }
+.badge-kind-article-created { background: #e8e3d5; color: #5a4a2f; }
+.badge-kind-article-updated { background: #ede6cc; color: #6a5a1a; }
+
+/* ---------- Activity list ---------- */
+
+.activity-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.activity-list > li {
+  padding: 0.55rem 0;
+  border-bottom: 1px dotted var(--rule);
+}
+.activity-list > li:last-child { border-bottom: none; }
+
+.activity-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+}
+.activity-row .date {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--fg-subtle);
+  min-width: 5.5rem;
+}
+.activity-row a { color: var(--fg); }
+.activity-context {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.activity-author {
+  color: var(--fg-subtle);
+  font-size: 0.82rem;
+  margin-left: auto;
+}
+.activity-snippet {
+  margin: 0.3rem 0 0 6.3rem;
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  line-height: 1.4;
+}
+
+/* ---------- Article body ---------- */
+
+.article-body {
+  /* hanging indent for first paragraph after major headings — purely
+     typographic, no functional weight */
+}
+
+.article-body h2:first-of-type { margin-top: 1.5rem; }
+
+/* ---------- Talk section ---------- */
+
+.talk-section {
+  margin-top: 4rem;
+  background: var(--bg-talk);
+  margin-left: calc(-1 * (50vw - 50%));
+  margin-right: calc(-1 * (50vw - 50%));
+  padding: 2.5rem 1.25rem 3rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.talk-header {
+  max-width: 38rem;
+  margin: 0 auto 1.5rem;
+}
+.talk-header h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.3rem;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+.talk-note {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  margin: 0;
+  font-style: italic;
+}
+
+.talk-body {
+  max-width: 38rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+
+.talk-body h2 {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  margin: 2rem 0 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-weight: 600;
+  color: var(--fg);
+}
+.talk-body > h2:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.talk-body strong {
+  font-family: var(--sans);
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.talk-body blockquote {
+  border-left-color: var(--accent-soft);
+  font-size: 0.97em;
+}
+
+.talk-body .empty {
+  color: var(--fg-subtle);
+  font-style: italic;
+}
+
+/* ---------- Index ---------- */
+
+.site-header {
+  text-align: left;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header h1 { margin: 0; font-size: 2.1rem; }
+.site-header .tagline {
+  margin: 0.5rem 0 0;
+  font-family: var(--serif);
+  color: var(--fg-muted);
+  font-size: 1.05rem;
+}
+
+.index-main section { margin-bottom: 2rem; }
+.index-main h2 {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.article-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.article-list li {
+  padding: 0.25rem 0;
+  border-bottom: 1px dotted var(--rule);
+}
+.article-list li:last-child { border-bottom: none; }
+
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--fg-subtle);
+}
+
+/* Article pages: sticky TOC sidebar + main column with article+talk.
+ * Only applied on article pages; root docs and the index keep the
+ * default single-column layout. */
+.article-page {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) 1fr;
+  gap: 2.5rem;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.article-page > .toc {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-right: 1px solid var(--rule);
+}
+.article-page > .toc h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+  font-family: var(--sans);
+}
+.article-page > .toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.article-page > .toc li {
+  margin: 0.25rem 0;
+}
+.article-page > .toc li.toc-3 {
+  padding-left: 0.9rem;
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+.article-page > .toc li.toc-2 {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.article-page > .toc a {
+  text-decoration: none;
+  color: inherit;
+}
+.article-page > .toc a:hover {
+  color: var(--accent);
+}
+
+/* Inside .article-main, the existing rules for main / aside / header
+ * (max-width 38rem, margin auto) still apply — but the grid column
+ * width caps where they can stretch. */
+.article-page > .article-main {
+  min-width: 0;
+}
+
+/* Mobile / narrow: stack TOC above content instead of beside it. */
+@media (max-width: 800px) {
+  .article-page {
+    grid-template-columns: 1fr;
+    max-width: 38rem;
+    gap: 1rem;
+  }
+  .article-page > .toc {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 0 0 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Portal home — project cards across vaults. */
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+.project-card {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 0 0 1rem;
+  background: #fff;
+}
+.project-card h2 {
+  margin: 0 0 0.25rem;
+}
+.project-card .tagline {
+  margin: 0 0 0.5rem;
+  color: var(--fg-muted);
+}
+.project-card .project-meta {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--fg-subtle);
+}

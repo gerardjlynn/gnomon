@@ -1,0 +1,8 @@
+node_modules/
+_site/
+_portal/
+_reader/
+.gnomon/
+.obsidian/
+.DS_Store
+*.zip
