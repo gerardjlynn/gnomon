@@ -6,3 +6,4 @@ _reader/
 .obsidian/
 .DS_Store
 *.zip
+vaults.json
