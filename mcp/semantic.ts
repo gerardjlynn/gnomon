@@ -60,13 +60,17 @@ async function getEmbedder() {
   if (!embedderPromise) {
     embedderPromise = (async () => {
       // Imported lazily so the server starts even if the dep is absent;
-      // only meaning_search fails, with a clear error. @xenova/transformers
-      // (classic v2) bundles an onnxruntime-node with the darwin-x64 native
-      // binary, which the newer @huggingface/transformers dropped — so it
-      // loads under x64 Node on Apple Silicon (Rosetta), where the new one
-      // can't. Fully local; no network except the one-time model download.
-      const { pipeline } = await import("@xenova/transformers");
-      const extractor = await pipeline("feature-extraction", MODEL);
+      // only meaning_search fails, with a clear error. Uses
+      // @huggingface/transformers (successor to @xenova/transformers v2,
+      // whose deps carried unfixable advisories). Needs native-arch Node:
+      // onnxruntime-node ships darwin-arm64 but not darwin-x64 binaries.
+      // dtype "q8" loads the same quantized weights v2 used by default, so
+      // vectors in an existing index stay comparable with new queries.
+      // Fully local; no network except the one-time model download.
+      const { pipeline } = await import("@huggingface/transformers");
+      const extractor = await pipeline("feature-extraction", MODEL, {
+        dtype: "q8",
+      });
       return async (texts: string[]) => {
         const out = await extractor(texts, {
           pooling: "mean",
